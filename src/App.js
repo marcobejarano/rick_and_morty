@@ -1,7 +1,11 @@
 import './global.css';
 import Cards from './components/Cards/Cards';
 import NavBar from './components/NavBar/NavBar';
+import About from './components/About/About';
+import Detail from './components/Detail/Detail';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 export default function App() {
 	const [characters, setCharacters] = useState([]);
@@ -33,7 +37,16 @@ export default function App() {
 	return (
 		<div className='App' style={{ padding: '25px' }}>
 		    <NavBar onSearch={ onSearch } />
-	        <Cards characters={ characters } onClose={ onClose } />
+		    <Routes>
+		        <Route path='/' element={ <Navigate to="/home" /> } />
+		        <Route 
+		            path='/home' 
+		            element={ <Cards characters={ characters } onClose={ onClose } /> }
+		        />
+		        <Route path='/about' element={ <About /> } />
+		        <Route path='/detail/:detailId' element={ <Detail /> } />
+		        <Route path='*' element={ <NotFoundPage /> } />
+		    </Routes>
 		</div>
 	);
 }

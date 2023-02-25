@@ -2,14 +2,14 @@
 	padding: 10px;
 }
 
-.searchBarContainer__input {
+.searchBar__input {
 	padding: 5px;
 	border: 2px solid black;
 	border-radius: 5px;
 	margin: 10px;
 }
 
-.searchBarContainer__button {
+.searchBar__button {
 	padding: 5px;
 	border: 2px solid gray;
 	border-radius: 5px;
@@ -20,12 +20,12 @@
 	color: white;
 }
 
-.searchBarContainer__button:hover {
+.searchBar__button:hover {
 	background-color: blue ;
 	color: red;
 }
 
-.searchBarContainer__button:active {
+.searchBar__button:active {
 	background-color: brown;
 	color: black;
 }

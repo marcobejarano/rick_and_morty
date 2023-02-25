@@ -24,19 +24,19 @@ export default function SearchBar(props) {
 		    <input 
 		        type='text' 
 		        name='search' 
-		        className={ styles.searchBarContainer__input } 
+		        className={ styles.searchBar__input } 
 		        onChange={ handleCharacterIdChange }
 		    />
 		    <button 
 		        type='submit' 
-		        className={ styles.searchBarContainer__button }
+		        className={ styles.searchBar__button }
 		    >
 		        Agregar
 		    </button>
 		    <button 
 		        type='button' 
 		        onClick={ handleRandomSearch }
-		        className={ styles.searchBarContainer__button }
+		        className={ styles.searchBar__button }
 		    >
 		        Buscar Random
 		    </button>
