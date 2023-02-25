@@ -1,0 +1,7 @@
+.navBarContainer {
+	border-radius: 10px;
+	margin-block-end: 30px;
+	display: flex;
+	justify-content: flex-end;
+	background-color: skyblue;
+}

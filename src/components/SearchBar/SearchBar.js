@@ -1,18 +1,45 @@
 import styles from './SearchBar.module.css';
+import { useState } from 'react';
 
 export default function SearchBar(props) {
+	const [characterId, setCharacterId] = useState();
+
 	const { onSearch } = props;
+
+	const handleCharacterIdChange = (e) => {
+		setCharacterId(e.target.value);
+	}
 
 	const handleSearch = (e) => {
 		e.preventDefault();
-		const characterId = e.target.search.value;
 		onSearch(characterId);
+	}
+
+	const handleRandomSearch = () => {
+		onSearch(Math.floor(Math.random() * 826) + 1);
 	}
 
 	return (
 		<form onSubmit={ handleSearch } className={ styles.searchBarContainer }>
-		    <input type='text' name='search' className={ styles.searchBarContainer__input } />
-		    <button type='submit' className={ styles.searchBarContainer__button }>Agregar</button>
+		    <input 
+		        type='text' 
+		        name='search' 
+		        className={ styles.searchBarContainer__input } 
+		        onChange={ handleCharacterIdChange }
+		    />
+		    <button 
+		        type='submit' 
+		        className={ styles.searchBarContainer__button }
+		    >
+		        Agregar
+		    </button>
+		    <button 
+		        type='button' 
+		        onClick={ handleRandomSearch }
+		        className={ styles.searchBarContainer__button }
+		    >
+		        Buscar Random
+		    </button>
 		</form>
 	);
 }
