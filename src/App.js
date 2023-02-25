@@ -1,7 +1,7 @@
 import './global.css';
-import Card from './components/Card';
-import Cards from './components/Cards';
-import SearchBar from './components/SearchBar';
+import Card from './components/Card/Card';
+import Cards from './components/Cards/Cards';
+import SearchBar from './components/SearchBar/SearchBar';
 import characters, { Rick } from './data';
 
 export default function App() {
