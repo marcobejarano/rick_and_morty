@@ -3,12 +3,35 @@ import Cards from './components/Cards/Cards';
 import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import Detail from './components/Detail/Detail';
+import Form from './components/Form/Form';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
-import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 export default function App() {
 	const [characters, setCharacters] = useState([]);
+	const [access, setAccess] = useState(false);
+
+	const location = useLocation();
+	const navigate = useNavigate();
+	const username = 'marco@hotmail.com';
+	const password = 'password12';
+
+	const login = (userData) => {
+		if (userData.username === username && userData.password === password) {
+			setAccess(true);
+			navigate('/home');
+		}
+	};
+
+	const logout = () => {
+		setAccess(false);
+		navigate('/');
+	};
+
+	useEffect(() => {
+		!access && navigate('/');
+	}, [access, navigate]);
 
 	const onClose = (id) => {
 		setCharacters(characters.filter(character => character.id !== id));
@@ -36,9 +59,11 @@ export default function App() {
  
 	return (
 		<div className='App' style={{ padding: '25px' }}>
-		    <NavBar onSearch={ onSearch } />
+		    {
+		    	location.pathname === '/' ? null : <NavBar onSearch={ onSearch } logout={ logout } />
+		    }
 		    <Routes>
-		        <Route path='/' element={ <Navigate to="/home" /> } />
+		        <Route path='/' element={ <Form login={ login } /> } />
 		        <Route 
 		            path='/home' 
 		            element={ <Cards characters={ characters } onClose={ onClose } /> }
