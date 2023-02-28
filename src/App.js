@@ -21,6 +21,8 @@ export default function App() {
 		if (userData.username === username && userData.password === password) {
 			setAccess(true);
 			navigate('/home');
+		} else {
+			window.alert('El nombre de usuario y/o contraseña son incorrectos')
 		}
 	};
 
@@ -60,7 +62,7 @@ export default function App() {
 	return (
 		<div className='App' style={{ padding: '25px' }}>
 		    {
-		    	location.pathname === '/' ? null : <NavBar onSearch={ onSearch } logout={ logout } />
+		    	location.pathname !== '/' && <NavBar onSearch={ onSearch } logout={ logout } />
 		    }
 		    <Routes>
 		        <Route path='/' element={ <Form login={ login } /> } />

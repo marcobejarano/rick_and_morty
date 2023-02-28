@@ -9,15 +9,16 @@ export default function Form(props) {
 	const { login } = props;
 
 	const handleInputChange = (e) => {
+		const { name, value } = e.target;
 		setUserData({
 			...userData,
-			[e.target.name]: e.target.value
+			[name]: value
 		});
 
 		setErrors(
 			validate({
 				...userData,
-				[e.target.name]: e.target.value
+				[name]: value
 			})
 		);
 	}

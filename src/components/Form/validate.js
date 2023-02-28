@@ -1,15 +1,17 @@
 export default function validation (input) {
-	let errors = {};
+	const errors = {};
+	const regexEmail = /\S+@\S+\.\S+/;
+	const regexPass = /\d/;
 
 	if (!input.username) {
 		errors.username = 'El nombre de usuario no puede estar vacío'
-	} else if (!/\S+@\S+\.\S+/.test(input.username)) {
+	} else if (!regexEmail.test(input.username)) {
 		errors.username = 'El nombre de usuario tiene que ser un email';
 	}
 	if (input.username.length > 35) {
 		errors.username = 'El nombre de usuario no puede tener más de 35 caracteres';
 	}
-	if (!/\d/.test(input.password)) {
+	if (!regexPass.test(input.password)) {
 		errors.password = 'La contraseña contiene al menos un número';
 	}
 	if (input.password.length < 6 || input.password.length > 10) {
