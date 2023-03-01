@@ -22,6 +22,13 @@
 	color: white;
 }
 
+.card__button_favorite {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	inline-size: 30px;
+}
+
 .card__name {
 	position: absolute;
 	bottom: 50px;

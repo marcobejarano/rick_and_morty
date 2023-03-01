@@ -15,6 +15,9 @@ export default function NavBar(props) {
 			        <button className={ styles.navBar__button }>About</button>
 			    </NavLink>
 			    <button onClick={ logout } className={ styles.navBar__button }>Logout</button>
+			    <NavLink to='/favorites'>
+			        <button className={ styles.navBar__button }>Favorites</button>
+			    </NavLink>
 			</div>
 		    <SearchBar onSearch={ onSearch } />
 		</div>

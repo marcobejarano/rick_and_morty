@@ -4,11 +4,14 @@ import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
+import Favorites from './components/Favorites/Favorites';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { removeCharacter } from './redux/actions';
+import { connect } from 'react-redux';
 
-export default function App() {
+function App(props) {
 	const [characters, setCharacters] = useState([]);
 	const [access, setAccess] = useState(false);
 
@@ -16,6 +19,7 @@ export default function App() {
 	const navigate = useNavigate();
 	const username = 'marco@hotmail.com';
 	const password = 'password12';
+	const { myFavorites, deleteFavorite } = props;
 
 	const login = (userData) => {
 		if (userData.username === username && userData.password === password) {
@@ -37,6 +41,11 @@ export default function App() {
 
 	const onClose = (id) => {
 		setCharacters(characters.filter(character => character.id !== id));
+
+		const favorite = myFavorites.find(character => character.id === id);
+		if (favorite) {
+			deleteFavorite(id);
+		}
 	};
 
 	const onSearch = (characterId) => {
@@ -72,8 +81,23 @@ export default function App() {
 		        />
 		        <Route path='/about' element={ <About /> } />
 		        <Route path='/detail/:detailId' element={ <Detail /> } />
+		        <Route path='/favorites' element={ <Favorites /> } />
 		        <Route path='*' element={ <NotFoundPage /> } />
 		    </Routes>
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		myFavorites: state.myFavorites
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		deleteFavorite: (id) => dispatch(removeCharacter(id))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
