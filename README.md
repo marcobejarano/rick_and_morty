@@ -1,3 +1,7 @@
+# Para acceder al proyecto
+  Username: marco@hotmail.com
+  Password: password12
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
