@@ -1,6 +1,6 @@
 const initialState = {
 	myFavorites: [],
-	allCharacters: []
+	adjustableFavorites: []
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -8,26 +8,34 @@ export const rootReducer = (state = initialState, action) => {
 	    case 'ADD_CHARACTER':
 	    	return {
 	    		...state,
-	    		myFavorites: [...state.allCharacters, action.payload],
-	    		allCharacters: [...state.allCharacters, action.payload]
+	    		myFavorites: [...state.myFavorites, action.payload],
+	    		adjustableFavorites: [...state.adjustableFavorites, action.payload]
 	    	};
 	    case 'REMOVE_CHARACTER':
-	    	const list = state.myFavorites.filter(character => character.id !== action.payload);
+	    	const listFavorites = state.myFavorites.filter(character => character.id !== action.payload);
+	    	const listAdjustableFavorites = state.adjustableFavorites.filter(character => character.id !== action.payload);
 	    	return {
 	    		...state,
-	    		myFavorites: list
+	    		myFavorites: listFavorites,
+	    		adjustableFavorites: listAdjustableFavorites
 	    	};
 	    case 'FILTER':
-	    	const filterCopy = [...state.allCharacters];
+	    	const filterCopy = [...state.myFavorites];
 	    	const filter = filterCopy.filter(character => (
 	    		character.gender === action.payload
 	    	));
 	    	return {
 	    		...state,
-	    		myFavorites: filter
+	    		adjustableFavorites: filter
 	    	}
 	    case 'ORDER':
-	    	const orderedList = [...state.allCharacters];
+	    	let orderedList = [];
+	    	if (state.myFavorites === state.adjustableFavorites) {
+	    		orderedList = [...state.myFavorites];
+	    	} else {
+	    		orderedList = [...state.adjustableFavorites];
+	    	}
+	    	
 	    	if (action.payload === 'Ascendente') {
 	    		orderedList.sort((a, b) => a.id - b.id);
 	    	} else if (action.payload === 'Descendente') {
@@ -35,9 +43,9 @@ export const rootReducer = (state = initialState, action) => {
 	    	}
 	    	return {
 	    		...state,
-	    		myFavorites: orderedList
+	    		adjustableFavorites: orderedList
 	    	}
 	    default:
-	    	return state;
+	    	return { ...state };
 	}
 }

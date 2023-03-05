@@ -1,11 +1,9 @@
 import styles from './Favorites.module.css';
-import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { filterCards, orderCards } from '../../redux/actions';
 
 const Favorites = (props) => {
-	console.log(props);
-	const { myFavorites } = props;
+	const { adjustableFavorites } = props;
 	const dispatch = useDispatch();
 
 	const handleOrderChange = (e) => {
@@ -31,7 +29,7 @@ const Favorites = (props) => {
 		        </select>
 		    </div>
 		    <div className={ styles.favorites__list }>
-			    { myFavorites.map(myFavorite => (
+			    { adjustableFavorites.map(myFavorite => (
 			    	<div key={ myFavorite.id } className={ styles.favorite__container }>
 			    	    <img src={ myFavorite.image } alt={ myFavorite.name } className={ styles.favorite__image } />
 			    	    <div className={ styles.favorite__name }>{ myFavorite.name }</div>
@@ -44,7 +42,7 @@ const Favorites = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		myFavorites: state.myFavorites
+		adjustableFavorites: state.adjustableFavorites,
 	};
 };
 
