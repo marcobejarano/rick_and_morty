@@ -2,7 +2,7 @@ import styles from './SearchBar.module.css';
 import { useState } from 'react';
 
 export default function SearchBar(props) {
-	const [characterId, setCharacterId] = useState();
+	const [characterId, setCharacterId] = useState(null);
 
 	const { onSearch } = props;
 
@@ -21,20 +21,20 @@ export default function SearchBar(props) {
 
 	return (
 		<form onSubmit={ handleSearch } className={ styles.searchBarContainer }>
-		    <input 
-		        type='text' 
-		        name='search' 
-		        className={ styles.searchBar__input } 
+		    <input
+		        type='text'
+		        name='search'
+		        className={ styles.searchBar__input }
 		        onChange={ handleCharacterIdChange }
 		    />
-		    <button 
-		        type='submit' 
+		    <button
+		        type='submit'
 		        className={ styles.searchBar__button }
 		    >
 		        Agregar
 		    </button>
-		    <button 
-		        type='button' 
+		    <button
+		        type='button'
 		        onClick={ handleRandomSearch }
 		        className={ styles.searchBar__button }
 		    >

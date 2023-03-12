@@ -49,7 +49,7 @@ function App(props) {
 	};
 
 	const onSearch = (characterId) => {
-		fetch(`http://localhost:3001/api/rickandmorty/onsearch/${characterId}`)
+		fetch(`http://localhost:3001/api/rickandmorty/character/${characterId}`)
 		    .then(res => res.json())
 		    .then(data => {
 		    	if (characters.some(character => character.id === data.id)) {
@@ -69,7 +69,7 @@ function App(props) {
 	};
  
 	return (
-		<div className='App' style={{ padding: '25px' }}>
+		<div className= 'App'>
 		    {
 		    	location.pathname !== '/' && <NavBar onSearch={ onSearch } logout={ logout } />
 		    }

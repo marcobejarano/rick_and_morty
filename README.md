@@ -1,5 +1,10 @@
 # Para acceder al proyecto
-  Username: marco@hotmail.com
+  Inside the back folder and at the same level of the package.json file, create an .env file with the following environment variables:\
+  HOSTNAME=localhost\
+  PORT=3001\
+
+  To log into the project, use these credentials:\
+  Username: marco@hotmail.com\
   Password: password12
 
 # Getting Started with Create React App
