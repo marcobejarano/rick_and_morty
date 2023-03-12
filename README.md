@@ -1,7 +1,7 @@
 # Para acceder al proyecto
   Inside the back folder and at the same level of the package.json file, create an .env file with the following environment variables:\
   HOSTNAME=localhost\
-  PORT=3001\
+  PORT=3001
 
   To log into the project, use these credentials:\
   Username: marco@hotmail.com\

@@ -1,10 +1,8 @@
-const express = require('express');
 const axios = require('axios');
-const router = express.Router();
 
 let fav = [];
 
-router.get('/api/rickandmorty/character/:id', (req, res) => {
+const getCharacterById = (req, res) => {
 	const id = parseInt(req.params.id);
 	axios.get(`https://rickandmortyapi.com/api/character/${ id }`)
 	    .then(response => response.data)
@@ -23,9 +21,9 @@ router.get('/api/rickandmorty/character/:id', (req, res) => {
 	    .catch(err => {
 	    	res.status(404).json(err.message);
 	    });
-});
+};
 
-router.get('/api/rickandmorty/detail/:detailId', (req, res) => {
+const getCharacterDetailsById = (req, res) => {
 	const detailId = parseInt(req.params.detailId);
 	axios.get(`https://rickandmortyapi.com/api/character/${ detailId }`)
 	    .then(response => response.data)
@@ -45,17 +43,17 @@ router.get('/api/rickandmorty/detail/:detailId', (req, res) => {
 	    .catch(err => {
 	    	res.status(404).json(err.message);
 	    });
-});
+};
 
-router.get('/api/rickandmorty/fav', (req, res) => {
+const getFavoriteCharacters = (req, res) => {
 	const characters = fav.map(character => {
 		const { id, name, image } = character;
 		return { id, name, image };
 	});
 	res.status(200).json(characters);
-});
+};
 
-router.post('/api/rickandmorty/fav', (req, res) => {
+const addFavoriteCharacter = (req, res) => {
 	const character = req.body;
 	if (fav.includes(character)) {
 		res.status(400).json({ error: 'El personaje ya está agregado a favoritos' });
@@ -63,9 +61,9 @@ router.post('/api/rickandmorty/fav', (req, res) => {
 	}
 	fav = [...fav, character];
 	res.status(201).json(character);
-});
+}
 
-router.delete('/api/rickandmorty/fav/:id', (req, res) => {
+const deleteFavoriteCharacterById = (req, res) => {
 	const id = parseInt(req.params.id);
 	const index = fav.findIndex(character => character.id === id);
 
@@ -74,6 +72,12 @@ router.delete('/api/rickandmorty/fav/:id', (req, res) => {
 	}
 	fav = fav.filter(character => character.id !== id);
 	res.status(200).json(fav);
-});
+}
 
-module.exports = router;
+module.exports = { 
+	getCharacterById,
+	getCharacterDetailsById,
+	getFavoriteCharacters,
+	addFavoriteCharacter,
+	deleteFavoriteCharacterById
+};
