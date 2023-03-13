@@ -2,17 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const {
-	getCharacterById,
-	getCharacterDetailsById,
 	getFavoriteCharacters,
 	addFavoriteCharacter,
 	deleteFavoriteCharacterById
-} = require('../controllers/rickandmorty.controller');
+} = require('../controllers/favs.controller');
+const getCharacterById = require('../controllers/getCharacterById.controller');
+const getCharacterDetailsById = require('../controllers/getCharacterDetailsById.controller');
 
-router.get('/api/rickandmorty/character/:id', getCharacterById);
-router.get('/api/rickandmorty/detail/:detailId', getCharacterDetailsById);
-router.get('/api/rickandmorty/fav', getFavoriteCharacters);
-router.post('/api/rickandmorty/fav', addFavoriteCharacter);
-router.delete('/api/rickandmorty/fav/:id', deleteFavoriteCharacterById);
+router.get('/character/:id', getCharacterById);
+router.get('/detail/:detailId', getCharacterDetailsById);
+router.get('/fav', getFavoriteCharacters);
+router.post('/fav', addFavoriteCharacter);
+router.delete('/fav/:id', deleteFavoriteCharacterById);
 
 module.exports = router;

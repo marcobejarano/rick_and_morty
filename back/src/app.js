@@ -1,14 +1,18 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const routes = require('./routes');
+const morgan = require('morgan');
+const router = require('./routes');
 
 const app = express();
+const hostName = process.env.HOSTNAME;
+const port = process.env.PORT;
 
+app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use('/', routes);
+app.use(morgan('dev'));
+app.use('/api/rickandmorty', router);
 
-module.exports = app;
+app.listen(port, hostName, () => {
+	console.log(`Server running at http://${ hostName }/${ port }`);
+});
