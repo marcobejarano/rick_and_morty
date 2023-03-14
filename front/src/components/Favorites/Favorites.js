@@ -1,10 +1,15 @@
 import styles from './Favorites.module.css';
+import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { filterCards, orderCards } from '../../redux/actions';
+import { filterCards, orderCards, getCharacters } from '../../redux/actions';
 
 const Favorites = (props) => {
 	const { adjustableFavorites } = props;
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getCharacters());
+	}, [dispatch]);
 
 	const handleOrderChange = (e) => {
 		dispatch(orderCards(e.target.value));

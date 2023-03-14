@@ -24,6 +24,7 @@ const deleteFavoriteCharacterById = (req, res) => {
 
 	if (index === -1) {
 		res.status(404).send({ error: 'El personaje no fue encontrado' });
+		return;
 	}
 	fav = fav.filter(character => character.id !== id);
 	res.status(200).send(fav);

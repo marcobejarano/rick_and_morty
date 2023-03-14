@@ -19,6 +19,11 @@ export const rootReducer = (state = initialState, action) => {
 	    		myFavorites: listFavorites,
 	    		adjustableFavorites: listAdjustableFavorites
 	    	};
+	    case 'GET_CHARACTERS':
+	    	return {
+	    		...state,
+	    		adjustableFavorites: action.payload
+	    	}
 	    case 'FILTER':
 	    	const filterCopy = [...state.myFavorites];
 	    	const filter = filterCopy.filter(character => (
